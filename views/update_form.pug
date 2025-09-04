@@ -2,30 +2,87 @@ doctype html
 html
   head
     title= title
+    style.
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+      }
+      h1 {
+        text-align: center;
+        margin-top: 20px;
+      }
+      .form-container {
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+      .form-container label {
+        font-size: 16px;
+        margin-bottom: 8px;
+        display: block;
+      }
+      .form-container input {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 14px;
+      }
+      .form-container button {
+        width: 100%;
+        padding: 12px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+      .form-container button:hover {
+        background-color: #45a049;
+      }
+      .form-container a {
+        display: block;
+        text-align: center;
+        margin-top: 15px;
+        font-size: 16px;
+        text-decoration: none;
+        color: #4CAF50;
+      }
+      .form-container a:hover {
+        text-decoration: underline;
+      }
   body
-    h1 Create or Update Custom Object
-    form(action="/update-cobj" method="POST")
-      label Name:
-      input(type="text" name="name")
-      
-      label Make:
-      input(type="text" name="make")
-      
-      label Model:
-      input(type="text" name="model")
-      
-      label Serial Number:
-      input(type="text" name="serial_number")
-      
-      label Purchase Date:
-      input(type="date" name="purchase_date")
-      
-      label Warranty End Date:
-      input(type="date" name="warranty_end_date")
-      
-      label Description:
-      input(type="text" name="description")
-      
-      button(type="submit") Submit
-      
-    a(href="/") Return to Homepage
+    h1 Add New IT Asset
+    .form-container
+      form(action="/update-cobj" method="POST")
+        label(for="name") Name:
+        input(type="text" name="name" id="name" required)
+
+        label(for="make") Make:
+        input(type="text" name="make" id="make" required)
+
+        label(for="model") Model:
+        input(type="text" name="model" id="model" required)
+
+        label(for="serial_number") Serial Number:
+        input(type="text" name="serial_number" id="serial_number" required)
+
+        label(for="purchase_date") Purchase Date:
+        input(type="date" name="purchase_date" id="purchase_date" required)
+
+        label(for="warranty_end_date") Warranty End Date:
+        input(type="date" name="warranty_end_date" id="warranty_end_date" required)
+
+        label(for="description") Description:
+        input(type="text" name="description" id="description" required)
+
+        button(type="submit") Submit
+
+      a(href="/") Return to Homepage
