@@ -1,0 +1,17 @@
+doctype html
+html
+  head
+    title= title
+  body
+    h1 Custom Object List
+    table
+      thead
+        tr
+          th Name
+          th Description
+      tbody
+        each object in customObjects
+          tr
+            td= object.name
+            td= object.description
+    a(href="/update-cobj") Add New Custom Object

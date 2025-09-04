@@ -1,0 +1,31 @@
+doctype html
+html
+  head
+    title= title
+  body
+    h1 Create or Update Custom Object
+    form(action="/update-cobj" method="POST")
+      label Name:
+      input(type="text" name="name")
+      
+      label Make:
+      input(type="text" name="make")
+      
+      label Model:
+      input(type="text" name="model")
+      
+      label Serial Number:
+      input(type="text" name="serial_number")
+      
+      label Purchase Date:
+      input(type="date" name="purchase_date")
+      
+      label Warranty End Date:
+      input(type="date" name="warranty_end_date")
+      
+      label Description:
+      input(type="text" name="description")
+      
+      button(type="submit") Submit
+      
+    a(href="/") Return to Homepage
