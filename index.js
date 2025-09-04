@@ -14,23 +14,30 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Route 1: Homepage to fetch and display custom object data
-// Route 1: Homepage to fetch and display custom object data
 app.get("/", async (req, res) => {
-  const customObjectUrl = 'https://api.hubspot.com/crm/v3/objects/2-49265538';  // Replace with your custom object URL
+  const customObjectUrl = 'https://api.hubspot.com/crm/v3/objects/2-49265538';
   const headers = {
     Authorization: `Bearer ${process.env.PRIVATE_APP_ACCESS}`,
     'Content-Type': 'application/json'
   };
 
+  // Define the properties you want to retrieve from HubSpot
+  const properties = 'name,make,model,serial_number,purchase_date,warranty_end_date,description';
+
+  // Add the 'params' object to your axios request
+  const params = {
+      properties: properties
+  }
+
   try {
-    // Make the GET request to fetch custom object data
-    const response = await axios.get(customObjectUrl, { headers });
-    const customObjects = response.data.results;  // Extract the results (custom object records)
+    // Make the GET request with the properties specified in 'params'
+    const response = await axios.get(customObjectUrl, { headers, params }); // <-- FIX IS HERE
+    const customObjects = response.data.results;
 
     // Render the homepage pug template, passing the data
     res.render('homepage', { title: 'Custom Object List', customObjects: customObjects });
   } catch (error) {
-    console.error(error);
+    console.error("Error fetching data from HubSpot API:", error);
     res.status(500).send('Error retrieving data from HubSpot API');
   }
 });
