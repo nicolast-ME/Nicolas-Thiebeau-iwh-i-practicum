@@ -1,10 +1,52 @@
 doctype html
 html
   head
-    title= title
+    title Current IT Assets
+    style.
+      body {
+        font-family: Arial, sans-serif;
+        color: #333;
+      }
+      h1 {
+        font-weight: normal;
+        margin-bottom: 20px;
+        font-size: 24px;
+      }
+      .create-link-container {
+        border-top: 1px solid #e1e1e1;
+        border-bottom: 1px solid #e1e1e1;
+        padding: 10px 8px;
+        margin-bottom: -1px; /* Helps connect the link block to the table */
+      }
+      a {
+        color: #007bff;
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th, td {
+        border: 1px solid #e1e1e1;
+        padding: 10px 8px;
+        text-align: left;
+        vertical-align: top;
+      }
+      th {
+        background-color: black;
+        color: white;
+        font-weight: bold;
+      }
   body
-    h1 Custom Object List
-    a(href="/update-cobj") Add to this table
+    h1 Current IT Assets
+
+    //- Container for the link to mimic the spreadsheet style
+    div.create-link-container
+      a(href="/update-cobj") Create a new IT Asset
+
     table
       thead
         tr
