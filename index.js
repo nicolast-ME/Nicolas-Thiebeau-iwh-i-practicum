@@ -14,23 +14,27 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Route 1: Homepage to fetch and display custom object data
+// Route 1: Homepage to fetch and display custom object data
 app.get("/", async (req, res) => {
-  const customObjectUrl = 'https://api.hubspot.com/crm/v3/objects/2-49265538';  // Replace 'it_assets' with your custom object
+  const customObjectUrl = 'https://api.hubspot.com/crm/v3/objects/2-49265538';  // Replace with your custom object URL
   const headers = {
-      Authorization: `Bearer ${process.env.PRIVATE_APP_ACCESS}`,
-      'Content-Type': 'application/json'
+    Authorization: `Bearer ${process.env.PRIVATE_APP_ACCESS}`,
+    'Content-Type': 'application/json'
   };
 
   try {
-      const response = await axios.get(customObjectUrl, { headers });
-      const customObjects = response.data.results;
+    // Make the GET request to fetch custom object data
+    const response = await axios.get(customObjectUrl, { headers });
+    const customObjects = response.data.results;  // Extract the results (custom object records)
 
-      res.render('homepage', { title: 'Custom Object List', customObjects: customObjects });
+    // Render the homepage pug template, passing the data
+    res.render('homepage', { title: 'Custom Object List', customObjects: customObjects });
   } catch (error) {
-      console.error(error);
-      res.status(500).send('Error retrieving data from HubSpot API');
+    console.error(error);
+    res.status(500).send('Error retrieving data from HubSpot API');
   }
 });
+
 
 // Start the server
 app.listen(3001, () => {
