@@ -31,7 +31,7 @@ app.get("/", async (req, res) => {
 
   try {
     // Make the GET request with the properties specified in 'params'
-    const response = await axios.get(customObjectUrl, { headers, params }); // <-- FIX IS HERE
+    const response = await axios.get(customObjectUrl, { headers, params }); 
     const customObjects = response.data.results;
 
     // Render the homepage pug template, passing the data
@@ -44,8 +44,8 @@ app.get("/", async (req, res) => {
 
 
 // Start the server
-app.listen(3001, () => {
-  console.log('Server running on http://localhost:3001');
+app.listen(3000, () => {
+  console.log('Server running on http://localhost:3000');
 });
 
 // TODO: ROUTE 2 - Create a new app.get route for the form to create or update new custom object data.
@@ -74,14 +74,13 @@ app.post("/update-cobj", async (req, res) => {
       make: make,
       model: model,
       serial_number: serial_number,
-      purchase_date: formattedPurchaseDate,  // Use formatted date
-      warranty_end_date: formattedWarrantyEndDate,  // Use formatted date
+      purchase_date: formattedPurchaseDate,  
+      warranty_end_date: formattedWarrantyEndDate,  
       description: description
     }
   };
 
-  // Replace with the correct custom object API URL
-  const createCustomObjectUrl = 'https://api.hubspot.com/crm/v3/objects/2-49265538';  // Replace 'it_assets' with your custom object name
+  const createCustomObjectUrl = 'https://api.hubspot.com/crm/v3/objects/2-49265538';  
   const headers = {
     Authorization: `Bearer ${process.env.PRIVATE_APP_ACCESS}`,
     'Content-Type': 'application/json'

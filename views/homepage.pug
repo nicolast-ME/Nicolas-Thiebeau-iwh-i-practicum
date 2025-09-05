@@ -6,64 +6,128 @@ html
       body {
         font-family: Arial, sans-serif;
         color: #333;
+        background-color: #2c2f36; 
+        margin: 0;
+        padding: 0;
       }
       h1 {
         font-weight: normal;
-        margin-bottom: 20px;
+        margin: 20px 0 10px;
         font-size: 24px;
+        text-align: center;
+        color: white;
       }
-      .create-link-container {
-        border-top: 1px solid #e1e1e1;
-        border-bottom: 1px solid #e1e1e1;
-        padding: 10px 8px;
-        margin-bottom: -1px; /* Helps connect the link block to the table */
+      
+      .page {
+        width: 80%;
+        margin: 0 auto 40px; 
       }
-      a {
-        color: #007bff;
+    
+      .cta-row {
+        display: flex;
+        justify-content: center;
+        margin: 8px 0 16px;
+      }
+      .cta-row a {
+        color: #4e9dff;
+        font-size: 16px;
+        font-weight: bold;
         text-decoration: none;
+        padding: 8px 16px;
+        border-radius: 5px;
+        border: 2px solid #4e9dff;
+        background: transparent;
       }
-      a:hover {
-        text-decoration: underline;
+      .cta-row a:hover {
+        background-color: #4e9dff;
+        color: white;
       }
+
       table {
-        width: 100%;
+        width: 100%;                
         border-collapse: collapse;
+        background-color: white;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        border-radius: 8px;
+        overflow: hidden;          
       }
       th, td {
         border: 1px solid #e1e1e1;
-        padding: 10px 8px;
+        padding: 12px 15px;
         text-align: left;
         vertical-align: top;
+        font-size: 14px;
+        color: #333;
       }
       th {
-        background-color: black;
+        background-color: #4e9dff;
         color: white;
         font-weight: bold;
+      }
+      tr:hover { background-color: #f7f9ff; }
+
+      /* Column widths */
+      th:nth-child(1), td:nth-child(1) { width: 15%; } /* Name */
+      th:nth-child(2), td:nth-child(2) { width: 10%; } /* Make */
+      th:nth-child(3), td:nth-child(3) { width: 15%; } /* Model */
+      th:nth-child(4), td:nth-child(4) { width: 15%; } /* Serial Number */
+      th:nth-child(5), td:nth-child(5) { width: 10%; } /* Purchase Date (a touch wider) */
+      th:nth-child(6), td:nth-child(6) { width: 10%; } /* Warranty End Date (a touch wider) */
+      th:nth-child(7), td:nth-child(7) { width: 25%; } /* Description */
+
+      /* Empty state card */
+      .empty {
+        background: white;
+        color: #333;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        padding: 24px;
+        text-align: center;
+      }
+      .empty p { margin: 0 0 12px; }
+      .empty a {
+        color: #4e9dff;
+        font-weight: bold;
+        text-decoration: none;
+        border: 2px solid #4e9dff;
+        padding: 6px 12px;
+        border-radius: 5px;
+      }
+      .empty a:hover { background:#4e9dff; color:#fff; }
+
+      @media (max-width: 768px) {
+        .page { width: 90%; }
+        th, td { padding: 8px 10px; }
       }
   body
     h1 Current IT Assets
 
-    //- Container for the link to mimic the spreadsheet style
-    div.create-link-container
-      a(href="/update-cobj") Create a new IT Asset
+    .page
+      .cta-row
+        a(href="/update-cobj") Create a new IT Asset
 
-    table
-      thead
-        tr
-          th Name
-          th Make
-          th Model
-          th Serial Number
-          th Purchase Date
-          th Warranty End Date
-          th Description
-      tbody
-        each object in customObjects
-          tr
-            td= object.properties.name
-            td= object.properties.make
-            td= object.properties.model
-            td= object.properties.serial_number
-            td= object.properties.purchase_date
-            td= object.properties.warranty_end_date
-            td= object.properties.description
+      if customObjects && customObjects.length
+        table
+          thead
+            tr
+              th Name
+              th Make
+              th Model
+              th Serial Number
+              th Purchase Date
+              th Warranty End Date
+              th Description
+          tbody
+            each object in customObjects
+              tr
+                td= object.properties.name
+                td= object.properties.make
+                td= object.properties.model
+                td= object.properties.serial_number
+                td= object.properties.purchase_date
+                td= object.properties.warranty_end_date
+                td= object.properties.description
+      else
+        .empty
+          p No IT assets found yet.
+          a(href="/update-cobj") Add your first IT Asset
